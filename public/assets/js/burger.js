@@ -21,25 +21,26 @@ $(function() {
     $(".eatburger").on("click", function(event) {
         event.preventDefault();
 
-        var id = $(this).date("id");
+        var id = $(this).data("id");
         var devouredState = {
             devoured: 1
         };
-        $.ajax("api/burgers/" + id, {
+
+        $.ajax("/api/burgers/" + id, {
             type: "PUT",
             data: devouredState
         }).then(function() {
             console.log("Burger devoured");
             location.reload();
         });
-
     });
+
     $(".trashburger").on("click", function(event) {
         event.preventDefault();
 
         var id = $(this).data("id");
 
-        //Send Delete request
+        // Send the DELETE request.
         $.ajax({
             type: "DELETE",
             url: "/api/burgers/" + id
